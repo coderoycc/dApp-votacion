@@ -17,6 +17,9 @@ contract Votacion is ERC20Basic{
         recibirVotantes();
     }
 
+    function quienEnvio() public view returns(address){
+      return msg.sender;
+    }
     function verCandidatos() public view returns(address [4] memory){
         return candidatos;
     }
@@ -24,12 +27,12 @@ contract Votacion is ERC20Basic{
     function asignarToken(address _votante) public returns(bool){
         //MSG.SENDER asigna tokens a los votantes (OWNER)
         // Podemos restringir que solo variable de estado OWNER sea el que asigne votos
-        return approve(_votante, 1);
+        return approve(owner, _votante, 1);
     }
 
     function votar(address _candidato) public returns(bool){
         //MSG.SENDER envia su token a _candidato
-        return transfer(_candidato, 1);
+        return transferFrom(owner, _candidato, 1);
     }
 
     function verTokenAsignado(address _votante) public view returns(uint256){

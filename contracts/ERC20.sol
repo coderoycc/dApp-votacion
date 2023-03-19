@@ -23,7 +23,7 @@ interface IERC20{
     function transfer(address recipient, uint256 amount) external returns(bool);
 
     //devuelve un valor booleano con el resultado de la operacion de gasto
-    function approve(address spender, uint256 amount) external returns(bool);
+    function approve(address own, address spender, uint256 amount) external returns(bool);
 
     //devuelve un valor booleano con el resultado de la operacion de paso de una cantidad de tokens usando el metodo allowance()
     function transferFrom(address sender, address recipient, uint256 amount) external returns(bool);    
@@ -85,9 +85,9 @@ contract ERC20Basic is IERC20{
     }
 
     // (MSG.SENDER) ASIGNA 'N' TOKENS A UN DELEGADO 
-    function approve(address delegate, uint256 numTokens) public override returns(bool){
-        allowed[msg.sender][delegate] = numTokens;
-        emit Approval(msg.sender, delegate, numTokens);
+    function approve(address own, address delegate, uint256 numTokens) public override returns(bool){
+        allowed[own][delegate] = numTokens;
+        emit Approval(own, delegate, numTokens);
         return true;
     }
 
