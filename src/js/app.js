@@ -57,26 +57,12 @@ const App = {
   },
 
   bindEvents: function () {
-    const prueba = document.getElementById('btn');
     const quien = document.getElementById('quien');
     const conn = document.getElementById('conectar');
-    const asignar = document.getElementById('asignar');
     const ver = document.getElementById('ver');
+    const votar = document.getElementById('votar');
     const saldo = document.getElementById('saldo');
-    const approve = document.getElementById('approve');
     let app = App.contracts.Votacion;
-    let own;
-    prueba.addEventListener('click', async () => {
-      try {
-        own = await app.methods.owner().call();
-        console.log(own);
-        // const own = await app.owner();
-        // console.log(own, "\nEs el propietario");
-      } catch (error) {
-        console.log(error);
-        console.log('********** ERROR');
-      }
-    })
     quien.addEventListener('click', async () => {
       try {
         const add = window.ethereum.selectedAddress;
@@ -89,17 +75,7 @@ const App = {
       }
     })
     conn.addEventListener('click', verificaConn);
-    asignar.addEventListener('click', async () => {
-      try {
-        const addr = window.ethereum.selectedAddress;
-        const res = await app.methods.asignarToken(addr).send({ from: addr });
-        
-        console.log(res);
-      } catch (error) {
-        console.log("NO SE ASIGNO");
-        console.log(error);
-      }  
-    });
+    
     ver.addEventListener('click', async ()=>{
       try {
         const addr = window.ethereum.selectedAddress;
@@ -109,34 +85,22 @@ const App = {
         console.log(error);
         console.log('ERROR VER TOKEN');
       }
-    })
-    saldo.addEventListener('click', async ()=>{
+    });
+
+    votar.addEventListener('click', async () => {
+      const addr = "0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e";
       try {
-        console.log(app);
-        const own = await app.methods.owner().call();
-        console.log("PROPIETARIO: ",own);
-        const res = await app.methods.valanceOf(window.ethereum.selectedAddress).call((error, respuesta)=> {
-          if(error){
-            console.log(error);
-          }else{
-            console.log(respuesta, "\n*********");
-          }
-        })
-        return 0;
+        const res = await app.methods.votar(addr).send({ from: window.ethereum.selectedAddress });
+        console.log(res);
       } catch (error) {
         console.log(error);
       }
-    })
-    approve.addEventListener('click', async () => {
+    });
+    saldo.addEventListener('click', async ()=>{
+      const addr = "0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e";
       try {
-        console.log('USO DE APPROVE');
-        const own = await app.methods.owner().call();
-        console.log(own);
-        const a = await app.methods.approve(own, window.ethereum.selectedAddress, 1).send({ from: own })
-        console.log(a);
-        
-        const r = await app.methods.allowance(own, window.ethereum.selectedAddress).send({ from: own});
-        console.log("ASIGNADO: ",r);
+        const res = await app.methods.valanceOf(addr).call();
+        console.log(res);
       } catch (error) {
         console.log(error);
       }
