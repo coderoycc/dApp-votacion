@@ -30,19 +30,6 @@ const App = {
   },
 
   initContract: async function () {
-    // fetch('../../build/contracts/Votacion.json')
-    // .then(response => response.json())
-    // .then(data => {
-    //   const contractABI = data.abi;
-    //   const address = data.networks['5777'].address
-    //   console.log(contractABI);
-    //   App.contracts.Votacion = new web3.eth.Contract(
-    //     contractABI,
-    //     address
-    //   );  
-    // })
-    // .catch(error => console.error(error));
-
     try {
       const response = await fetch('../../build/contracts/Votacion.json');
       const data = await response.json();
@@ -57,54 +44,61 @@ const App = {
   },
 
   bindEvents: function () {
-    const quien = document.getElementById('quien');
-    const conn = document.getElementById('conectar');
-    const ver = document.getElementById('ver');
-    const votar = document.getElementById('votar');
-    const saldo = document.getElementById('saldo');
+    // document.getElementById('reu').addEventListener('click', () => {
+
+    // })
+    // const quien = document.getElementById('quien');
+    const conn = document.getElementById('btn-eth');
+    // const ver = document.getElementById('ver');
+    // const votar = document.getElementById('votar');
+    // const saldo = document.getElementById('saldo');
     let app = App.contracts.Votacion;
-    quien.addEventListener('click', async () => {
-      try {
-        const add = window.ethereum.selectedAddress;
+
+    // quien.addEventListener('click', async () => {
+    //   try {
+    //     const add = window.ethereum.selectedAddress;
         
-         const res = await app.methods.quienEnvio().call({ from: add });
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-        console.log("******ERROR ENVIO");
-      }
-    })
+    //      const res = await app.methods.quienEnvio().call({ from: add });
+    //     console.log(res);
+    //   } catch (error) {
+    //     console.log(error);
+    //     console.log("******ERROR ENVIO");
+    //   }
+    // })
     conn.addEventListener('click', verificaConn);
     
-    ver.addEventListener('click', async ()=>{
-      try {
-        const addr = window.ethereum.selectedAddress;
-        const res = await app.methods.verTokenAsignado(addr).call({ from: addr})
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-        console.log('ERROR VER TOKEN');
-      }
-    });
+    // const voto = async (addr) => {
+    //   try {
+    //     const res = await app.methods.votar(addr).send({ from: window.ethereum.selectedAddress });
+    //     console.log(res);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
 
-    votar.addEventListener('click', async () => {
-      const addr = "0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e";
-      try {
-        const res = await app.methods.votar(addr).send({ from: window.ethereum.selectedAddress });
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-      }
-    });
-    saldo.addEventListener('click', async ()=>{
-      const addr = "0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e";
-      try {
-        const res = await app.methods.valanceOf(addr).call();
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-      }
-    })
+    // ver.addEventListener('click', async ()=>{
+    //   try {
+    //     const addr = window.ethereum.selectedAddress;
+    //     const res = await app.methods.verTokenAsignado(addr).call({ from: addr})
+    //     console.log(res);
+    //   } catch (error) {
+    //     console.log(error);
+    //     console.log('ERROR VER TOKEN');
+    //   }
+    // });
+    // votar.addEventListener('click', async () => {
+    //   const addr = "0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e";
+    //   voto(addr);
+    // });
+    // saldo.addEventListener('click', async ()=>{
+    //   const addr = "0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e";
+    //   try {
+    //     const res = await app.methods.valanceOf(addr).call();
+    //     console.log(res);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // })
 
   }
 };
@@ -128,3 +122,17 @@ window.addEventListener('load', () => {
   console.log('INICIO de la DAPP');
   App.init()
 });
+
+
+
+// document.getElementById('nu').addEventListener('click', () => {
+
+// })
+
+// document.getElementById('tpu').addEventListener('click', () => {
+
+// })
+
+// document.getElementById('bc').addEventListener('click', () => {
+  
+// })
