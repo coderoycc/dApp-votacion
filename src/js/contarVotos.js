@@ -58,9 +58,9 @@ const App = {
   bindEvents: async function () {
 
     const porcentaje = document.getElementById('porcentaje');
-    const res = await cuentaVotos('0x0d5752D90c81373BB3E9b5D4E5B0DBc16c3801d4'); // OWNER
+    const res = await cuentaVotos(accounts.OWN); // OWNER
     console.log(res);
-    porcentaje.innerHTML = `${(res/10)*100} %`;
+    porcentaje.innerHTML = `${(10-res)*10} %`;
 
 
     const reu = await cuentaVotos(accounts.REU);

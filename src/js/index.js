@@ -42,7 +42,7 @@ async function getTransactions() {
     let fecha = new Date(t * 1000);
     divsTime[indice].textContent = `${mes[fecha.getMonth()]} ${
       fecha.getDate() < 10 ? "0" + fecha.getDate() : fecha.getDate()
-    }  ${fecha.getHours()}:${fecha.getMinutes()}`;
+    }  ${fecha.getHours()}:${fecha.getMinutes()< 10 ? '0'+fecha.getMinutes() : fecha.getMinutes()}`;
     divsHead[indice].textContent = `HASH: ${x.hash.substr(0,8)}...${x.hash.substr(58,66)}`;
     divsParr[indice].textContent = `Parent-Hash: ${x.parentHash.substr(0,10)}...${x.parentHash.substr(56,66)}`;
   }

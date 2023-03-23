@@ -90,7 +90,7 @@ const App = {
       voto(addr);
     });
     saldo.addEventListener('click', async ()=>{
-      const addr = "0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e";
+      const addr = "0x0d5752D90c81373BB3E9b5D4E5B0DBc16c3801d4";
       try {
         const res = await app.methods.valanceOf(addr).call();
         console.log(res);
