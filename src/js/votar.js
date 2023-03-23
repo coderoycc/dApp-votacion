@@ -44,66 +44,86 @@ const App = {
   },
 
   bindEvents: function () {
-    
-    const quien = document.getElementById('quien');
     const conn = document.getElementById('btn-eth');
-    const ver = document.getElementById('ver');
-    const votar = document.getElementById('votar');
-    const saldo = document.getElementById('saldo');
-    let app = App.contracts.Votacion;
-
-    quien.addEventListener('click', async () => {
-      try {
-        const add = window.ethereum.selectedAddress;
-        
-        const res = await app.methods.quienEnvio().call({ from: add });
-        console.log(res);
-        
-      } catch (error) {
-        console.log(error);
-        console.log("******ERROR ENVIO");
-      }
-    })
     conn.addEventListener('click', verificaConn);
-    
     const voto = async (addr) => {
       try {
         const res = await app.methods.votar(addr).send({ from: window.ethereum.selectedAddress });
         console.log(res);
+        if(res){
+          alertaVotoRegistrado();
+        }
       } catch (error) {
         console.log(error);
       }
     }
-
-    ver.addEventListener('click', async ()=>{
+    let app = App.contracts.Votacion;
+    document.getElementById('reu').addEventListener('click', async () => {
       try {
         const addr = window.ethereum.selectedAddress;
         const res = await app.methods.verTokenAsignado(addr).call({ from: addr})
-        console.log(res);
+        if(res != 0){
+          voto('0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e');
+        }else{
+          throw new Error('Ya voto');
+        }
       } catch (error) {
-        console.log(error);
-        console.log('ERROR VER TOKEN');
-      }
-    });
-    votar.addEventListener('click', async () => {
-      const addr = "0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e";
-      voto(addr);
-    });
-    saldo.addEventListener('click', async ()=>{
-      const addr = "0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e";
-      try {
-        const res = await app.methods.valanceOf(addr).call();
-        console.log(res);
-      } catch (error) {
+        alertaYaVoto();
         console.log(error);
       }
     })
+    
+    document.getElementById('nu').addEventListener('click', async () => {
+      try {
+        const addr = window.ethereum.selectedAddress;
+        const res = await app.methods.verTokenAsignado(addr).call({ from: addr})
+        if(res != 0){
+          voto('0xbC23B043ECB03ef7116fe743f033f59b039Bcc33');
+        }else{
+          throw new Error('Ya voto');
+        }
+      } catch (error) {
+        alertaYaVoto();
+        console.log(error);
+      }
+    })
+
+    document.getElementById('tpu').addEventListener('click', async () => {
+      try {
+        const addr = window.ethereum.selectedAddress;
+        const res = await app.methods.verTokenAsignado(addr).call({ from: addr})
+        if(res != 0){
+          voto('0xbC23B043ECB03ef7116fe743f033f59b039Bcc33');
+        }else{
+          throw new Error('Ya voto');
+        }
+      } catch (error) {
+        alertaYaVoto();
+        console.log(error);
+      }
+    })
+
+    document.getElementById('bc').addEventListener('click', async () => {
+      try {
+        const addr = window.ethereum.selectedAddress;
+        const res = await app.methods.verTokenAsignado(addr).call({ from: addr})
+        if(res != 0){
+          voto('0x565BD7B247e211d87d663282cbc33b86Cdbe995a');
+        }else{
+          throw new Error('Ya voto');
+        }
+      } catch (error) {
+        alertaYaVoto();
+        console.log(error);
+      }
+    })
+
 
   }
 };
 
 const verificaConn = () => {
-  if (window.ethereum.selectedAddress != null) {
+  if (window.ethereum.selectedAddress != null ) {
     Swal.fire({
       position: 'top-end',
       icon: 'success',
@@ -117,6 +137,24 @@ const verificaConn = () => {
   }
 }
 
+const alertaYaVoto = () => {
+  Swal.fire({
+    icon: 'error',
+    title: 'Usted ya votó',
+    text: 'Su token asignado ya fue usado',
+    footer: '<a href="">¿Se trata de un error?</a>',
+    width: '35em'
+  })
+}
+const alertaVotoRegistrado = () =>{
+  Swal.fire({
+    position: 'center', //top-end
+    icon: 'success',
+    title: 'Voto registrado',
+    showConfirmButton: false,
+    timer: 1500 //1500
+  });
+}
 window.addEventListener('load', () => {
   console.log('INICIO de la DAPP');
   App.init()
