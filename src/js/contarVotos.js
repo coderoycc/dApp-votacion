@@ -4,12 +4,11 @@ const App = {
   contracts: {},
 
   init: async function () {
-    // await App.initWeb3();
+    await App.initWeb3();
     await App.initContract();
-    App.bindEvents();
+    await App.bindEvents();
     
   },
-
   initWeb3: async function () {
     if (typeof window.ethereum !== 'undefined') {
       App.web3Provider = window.ethereum;
@@ -27,8 +26,8 @@ const App = {
       console.log("NO HAY PROVEEDOREEEEEEEEEEEEEES\n*******************************************");
     }
     web3 = new Web3(App.web3Provider);
+    // return App.initContract();
   },
-
   initContract: async function () {
     // fetch('../../build/contracts/Votacion.json')
     // .then(response => response.json())
@@ -56,26 +55,41 @@ const App = {
     }
   },
 
-  bindEvents: function () {
-    const conn = document.getElementById('btn-eth');
-    let app = App.contracts.Votacion;
-    conn.addEventListener('click', verificaConn);
+  bindEvents: async function () {
+
+    const porcentaje = document.getElementById('porcentaje');
+    const res = await obtenerPorcentaje();
+    console.log(res);
+    console.log();
+    porcentaje.innerHTML = `${(res/10)*100} %`;
+    
+    var x = document.getElementById('REU');
+    
+    x.innerHTML='100%';
+    x.style.height = '5px';
+
+    const reu = cuentaVotos('');
+    const bc = cuentaVotos('');
+    const tpu = cuentaVotos('');
+    const nu = cuentaVotos('');
+
   }
 };
 
-const verificaConn = () => {
-  if (window.ethereum.selectedAddress != null) {
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Estás Conectado',
-      showConfirmButton: false,
-      timer: 1500
-    })
-  } else {
-    App.initWeb3();
-    console.log('No esta conectado');
+const obtenerPorcentaje = async () => {
+  const app = App.contracts.Votacion;
+  try {
+    const own = "0x0d5752D90c81373BB3E9b5D4E5B0DBc16c3801d4";
+    const res = await app.methods.valanceOf(own).call();    
+    return res;
+  } catch (error) {
+    console.log(error);
+    return 0;
   }
+}
+
+const cuentaVotos = async () => {
+  console.log("-");
 }
 
 window.addEventListener('load', () => {
