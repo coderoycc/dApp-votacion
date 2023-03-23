@@ -58,29 +58,29 @@ const App = {
   bindEvents: async function () {
 
     const porcentaje = document.getElementById('porcentaje');
-    const res = await obtenerPorcentaje();
+    const res = await cuentaVotos('0x0d5752D90c81373BB3E9b5D4E5B0DBc16c3801d4'); // OWNER
     console.log(res);
-    console.log();
     porcentaje.innerHTML = `${(res/10)*100} %`;
-    
-    var x = document.getElementById('REU');
-    
-    x.innerHTML='100%';
-    x.style.height = '5px';
 
-    const reu = cuentaVotos('');
-    const bc = cuentaVotos('');
-    const tpu = cuentaVotos('');
-    const nu = cuentaVotos('');
 
+    const reu = await cuentaVotos(accounts.REU);
+    const bc = await cuentaVotos(accounts.BC);
+    const tpu = await cuentaVotos(accounts.TPU);
+    const nu = await cuentaVotos(accounts.NU);
+
+    // Calcular cantidad
+    // (100%, resultado, ID, )
+    calcular(10-Number(res), Number(reu), 'REU');
+    calcular(10-Number(res), Number(bc), 'BC');
+    calcular(10-Number(res), Number(tpu), 'TPU');
+    calcular(10-Number(res), Number(nu), 'NU');
   }
 };
 
-const obtenerPorcentaje = async () => {
+const cuentaVotos = async (addr) => {
   const app = App.contracts.Votacion;
   try {
-    const own = "0x0d5752D90c81373BB3E9b5D4E5B0DBc16c3801d4";
-    const res = await app.methods.valanceOf(own).call();    
+    const res = await app.methods.valanceOf(addr).call();    
     return res;
   } catch (error) {
     console.log(error);
@@ -88,12 +88,25 @@ const obtenerPorcentaje = async () => {
   }
 }
 
-const cuentaVotos = async () => {
-  console.log("-");
+const calcular = (proporcion, resultado, id) => {
+  proporcion = proporcion == 0 ? 1 : proporcion;
+  let per = (resultado/proporcion)*100;
+  const elem = document.getElementById(id);
+  if(per == 0){
+    elem.style.color = 'black';
+    elem.style.textShadow = 'none';
+    elem.innerHTML = '0 %';
+    elem.style.lineHeight = '2.5em';
+  }else{
+    elem.innerHTML = `${parseInt(per)} %`;
+    // 160 -- 100%
+    // X --- per
+    elem.style.height = `${(per*160)/100}px`;
+  }
+
 }
 
 window.addEventListener('load', () => {
   console.log('INICIO de la DAPP');
   App.init();
-  console.log(App.contracts.Votacion);
 });

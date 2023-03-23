@@ -63,7 +63,7 @@ const App = {
         const addr = window.ethereum.selectedAddress;
         const res = await app.methods.verTokenAsignado(addr).call({ from: addr})
         if(res != 0){
-          voto('0x0A8D90D500CB1E55a57fDcBB6450177e938d6D0e');
+          voto(accounts.REU);
         }else{
           throw new Error('Ya voto');
         }
@@ -78,7 +78,7 @@ const App = {
         const addr = window.ethereum.selectedAddress;
         const res = await app.methods.verTokenAsignado(addr).call({ from: addr})
         if(res != 0){
-          voto('0xbC23B043ECB03ef7116fe743f033f59b039Bcc33');
+          voto(accounts.NU);
         }else{
           throw new Error('Ya voto');
         }
@@ -93,7 +93,7 @@ const App = {
         const addr = window.ethereum.selectedAddress;
         const res = await app.methods.verTokenAsignado(addr).call({ from: addr})
         if(res != 0){
-          voto('0xbC23B043ECB03ef7116fe743f033f59b039Bcc33');
+          voto(accounts.TPU);
         }else{
           throw new Error('Ya voto');
         }
@@ -108,7 +108,7 @@ const App = {
         const addr = window.ethereum.selectedAddress;
         const res = await app.methods.verTokenAsignado(addr).call({ from: addr})
         if(res != 0){
-          voto('0x565BD7B247e211d87d663282cbc33b86Cdbe995a');
+          voto(accounts.BC);
         }else{
           throw new Error('Ya voto');
         }

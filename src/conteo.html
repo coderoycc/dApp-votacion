@@ -27,14 +27,15 @@
         position: absolute;
         width: 40px;
         height: 160px;
-        bottom: 34px;
+        bottom: 50px;
         padding: 0 !important;
         margin: 0 !important;
         /* background-color: rgb(123,123,200); */
         text-align: center;
-        font-weight: bold;
+        font-weight: bolder;
         color: white;
-        line-height: 2.5em;
+        text-shadow: 1px 1px 2px #00fcfca6;
+        line-height: 1.5em;
         /* box-shadow: 3px .5px rgb(159, 159, 159); */
       }
       #vertgraph li.critical { 
@@ -134,10 +135,10 @@
                 <!-- Barras de conteo -->
                 <div class="contenido-barra" id="vertgraph">
                   <ul>
-                    <li class="critical" style="height: 1px;" id="BC">22</li>
-                    <li class="high" style="height: 1px;" id="REU">7</li>
-                    <li class="medium" style="height: 1px;" id="NU">3</li>
-                    <li class="low" style="height: 1px;" id="TPU">8</li>
+                    <li class="critical" style="height: 5px;list-style: none;" id="BC" >22</li>
+                    <li class="high" style="height: 5px; list-style: none;" id="REU">7</li>
+                    <li class="medium" style="height: 5px; list-style: none;" id="NU">3</li>
+                    <li class="low" style="height: 5px; list-style: none;" id="TPU">8</li>
                   </ul>
                 </div>
                 <div class="titulos" id="titulos">
@@ -184,6 +185,7 @@
     </div>
     <script src="js/web3.min.js"></script>
     <script src="./js/sweetalert2.min.js"></script>
+    <script src="./js/accounts.js"></script>
     <script src="./js/contarVotos.js"></script>
   </body>
 </html>
