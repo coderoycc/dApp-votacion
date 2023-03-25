@@ -8,7 +8,7 @@
   "sourceMap": "183:610:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "183:610:2:-:0;;;;;;;;",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity >=0.7.0;\r\npragma experimental ABIEncoderV2;\r\n\r\n\r\n// Fuente: \"https://gist.github.com/giladHaimov/8e81dbde10c9aeff69a1d683ed6870be\"\r\n\r\nlibrary SafeMath{\r\n    // Restas\r\n    function sub(uint256 a, uint256 b) internal pure returns (uint256) {\r\n      assert(b <= a);\r\n      return a - b;\r\n    }\r\n    \r\n    // Sumas\r\n    function add(uint256 a, uint256 b) internal pure returns (uint256) {\r\n      uint256 c = a + b;\r\n      assert(c >= a);\r\n      return c;\r\n    }\r\n    \r\n    // Multiplicacion\r\n    function mul(uint256 a, uint256 b) internal pure returns (uint256) {\r\n        if (a == 0) {\r\n            return 0;\r\n        }\r\n        uint256 c = a * b;\r\n        require(c / a == b, \"SafeMath: multiplication overflow\");\r\n\r\n        return c;\r\n    }\r\n}\r\n",
-  "sourcePath": "/home/rob/Plantillas/Dapps/voto/contracts/SafeMath.sol",
+  "sourcePath": "D:\\Cursos\\Dapps\\nuevo-voto-e\\contracts\\SafeMath.sol",
   "ast": {
     "absolutePath": "project:/contracts/SafeMath.sol",
     "exportedSymbols": {
@@ -2250,7 +2250,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.10",
-  "updatedAt": "2023-03-19T23:58:06.334Z",
+  "updatedAt": "2023-03-24T21:29:55.455Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
