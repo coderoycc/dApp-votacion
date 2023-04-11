@@ -6,4 +6,4 @@
 ## REQUERIMIENTOS PARA EJECUTAR
 * Debe tener instalado Ganache (dektop o cli)
 * Debe tener instalado NODE - NPM
-* En un navegador debe tener la extensión de MetaMask (<a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=es">PARA GOOGLE</a>)
+* En un navegador debe tener la extensión de MetaMask (<a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=es" target="_blank">PARA GOOGLE</a>)
