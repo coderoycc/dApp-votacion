@@ -18,3 +18,4 @@
 * Ahora usamos el método para asignar tokens a las cuentas de nueustra red (ganache).
 * Ejecutamos `await app.asignarToken(direccion)`
 * En lugar de 'direccion' se pone la dirección a la que se asigna el token '0x6df2...'.
+* Después de seguir todos los pasos, puede ejecutar la aplicación con el servidor web local de su preferencia. 
